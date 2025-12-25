@@ -25,3 +25,8 @@ def highlight(element, driver, duration=0.3):
             element,
             original_style
         )
+def textAssertion(elementActual,elementExpected, driver):
+    try:
+        assert elementActual==elementExpected, "Opps! didn't found."
+    except Exception as e:
+        print(e)

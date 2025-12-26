@@ -30,3 +30,7 @@ def textAssertion(elementActual,elementExpected, driver):
         assert elementActual==elementExpected, "Opps! didn't found."
     except Exception as e:
         print(e)
+
+def clickFunction(element,Driver):
+    highlight(element,Driver,0.9)
+    element.click()

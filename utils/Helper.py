@@ -1,5 +1,7 @@
 import time
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
+
 
 def highlight(element, driver, duration=0.3):
     """
@@ -34,3 +36,10 @@ def textAssertion(elementActual,elementExpected, driver):
 def clickFunction(element,Driver):
     highlight(element,Driver,0.9)
     element.click()
+
+def selectOptions(elemnt):
+    dropdown = Select(elemnt)
+    texts = [opt.text.strip() for opt in dropdown.options]
+    for text in texts:
+        print(text)
+        dropdown.select_by_visible_text(text)

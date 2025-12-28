@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.driver_finder import DriverFinder
 from selenium.webdriver.support.select import Select
 
-from utils.Helper import highlight, textAssertion, clickFunction, selectOptions
+from utils.Helper import highlight, textAssertion, clickFunction, selectOptions, prompt
 
 Driver= webdriver.Chrome()
 Driver.implicitly_wait(10)
@@ -48,15 +48,28 @@ clickFunction(radieo3,Driver)
 
 tab2=Driver.find_element(By.XPATH,"//legend[normalize-space()='Suggession Class Example']")
 highlight(tab2,Driver,0.9)
-
-input1=Driver.find_element(By.XPATH,"//select[@id='dropdown-class-example']")
-selects=Driver.find_elements(By.XPATH,"//select[@id='dropdown-class-example']")
+input1=Driver.find_element(By.XPATH,"//input[@id='autocomplete']")
+userInput=prompt(Driver)
+input1.send_keys(userInput)
+time.sleep(3)
+selects=Driver.find_elements(By.XPATH,"//li[@class='ui-menu-item']")
+for selction in selects:
+    if selction.text.lower()==userInput.lower():
+        highlight(selction,Driver,0.9)
+        selction.click()
+        break
 
 #Dropdowns
+dropDownExample=Driver.find_element(By.XPATH,"//legend[contains(normalize-space(),'Dropdown Example')]")
+highlight(dropDownExample,Driver,0.9)
 inpus=Driver.find_element(By.XPATH,"//select[@id='dropdown-class-example']")
 selectOptions(inpus)
 # rahul=Driver.find_element(By.XPATH,"//a[contains(text(),'RAHUL')]")
 # highlight(rahul,Driver,0.9)
+
+checkBox=Driver.find_element(By.CSS_SELECTOR,"div[id='checkbox-example'] legend")
+highlight(checkBox,Driver)
+
 
 time.sleep(5)
 Driver.close()

@@ -50,6 +50,7 @@ tab2=Driver.find_element(By.XPATH,"//legend[normalize-space()='Suggession Class 
 highlight(tab2,Driver,0.9)
 input1=Driver.find_element(By.XPATH,"//input[@id='autocomplete']")
 userInput=prompt(Driver)
+input1.clear()
 input1.send_keys(userInput)
 time.sleep(3)
 selects=Driver.find_elements(By.XPATH,"//li[@class='ui-menu-item']")

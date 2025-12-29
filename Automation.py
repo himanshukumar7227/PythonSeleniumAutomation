@@ -68,9 +68,58 @@ selectOptions(inpus)
 # rahul=Driver.find_element(By.XPATH,"//a[contains(text(),'RAHUL')]")
 # highlight(rahul,Driver,0.9)
 
+# Check Box :
 checkBox=Driver.find_element(By.CSS_SELECTOR,"div[id='checkbox-example'] legend")
 highlight(checkBox,Driver)
+for i in range(1,4):
+    m=Driver.find_element(By.XPATH,"//label[normalize-space()='Option"+str(i)+"']")
+    highlight(m,Driver,0.9)
+    n=Driver.find_element(By.XPATH,"//label[normalize-space()='Option"+str(i)+"']/child::input")
+    n.click()
+
+# New window opening and closing automation
+swichExample=Driver.find_element(By.XPATH,"//legend[normalize-space()='Switch Window Example']")
+highlight(swichExample,Driver,0.9)
+openWindowBtn=Driver.find_element(By.CSS_SELECTOR,"#openwindow")
+highlight(openWindowBtn,Driver,0.9)
+openWindowBtn.click()
+windowsOpen=Driver.window_handles
+Driver.switch_to.window(windowsOpen[1])
+Driver.maximize_window()
+loggo=Driver.find_element(By.XPATH,"(//img[@alt='Logo'])[1]")
+highlight(loggo,Driver,0.9)
+Driver.close()
+Driver.switch_to.window(windowsOpen[0])
+
+# New Tab
+switchTab=Driver.find_element(By.XPATH,"//legend[@class='switch-tab']")
+highlight(switchTab,Driver,0.9)
+switchTabclk=Driver.find_element(By.XPATH,"//a[@id='opentab']")
+switchTabclk.click()
+windowsOpen=Driver.window_handles
+Driver.switch_to.window(windowsOpen[1])
+loggo=Driver.find_element(By.XPATH,"(//img[@alt='Logo'])[1]")
+highlight(loggo,Driver,0.9)
+Driver.close()
+Driver.switch_to.window(windowsOpen[0])
+highlight(Logo,Driver,0.9)
+
+# Alert And Promt
+alertt=Driver.find_element(By.XPATH,"//legend[normalize-space()='Switch To Alert Example']")
+highlight(alertt,Driver,0.9)
+alerBtntxt=prompt(Driver)
+alertBtn=Driver.find_element(By.CSS_SELECTOR,"#name")
+alertBtn.send_keys(alerBtntxt)
+clkalert=Driver.find_element(By.CSS_SELECTOR,"#alertbtn")
+clkalert.click()
+windowsOpen=Driver.window_handles
+al=Driver.switch_to.alert
+print(al.text)
+time.sleep(2)
+al.accept()
 
 
-time.sleep(5)
+
+
+time.sleep(3)
 Driver.close()

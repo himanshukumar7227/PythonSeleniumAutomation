@@ -1,4 +1,5 @@
 import time
+from time import sleep
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -109,17 +110,32 @@ alertt=Driver.find_element(By.XPATH,"//legend[normalize-space()='Switch To Alert
 highlight(alertt,Driver,0.9)
 alerBtntxt=prompt(Driver)
 alertBtn=Driver.find_element(By.CSS_SELECTOR,"#name")
+highlight(alertBtn,Driver,0.9)
 alertBtn.send_keys(alerBtntxt)
 clkalert=Driver.find_element(By.CSS_SELECTOR,"#alertbtn")
+highlight(clkalert,Driver,0.9)
 clkalert.click()
-windowsOpen=Driver.window_handles
 al=Driver.switch_to.alert
 print(al.text)
 time.sleep(2)
 al.accept()
 
+clcConfirm=Driver.find_element(By.XPATH,"//input[@id='confirmbtn']")
+highlight(clcConfirm,Driver,0.9)
+clcConfirm.click()
+confirm=Driver.switch_to.alert
+sleep(2)
+confirm.dismiss()
 
+ifram=Driver.find_element(By.XPATH,"//iframe[@id='courses-iframe']")
+Driver.execute_script("arguments[0].scrollIntoView(true);", ifram)
+Driver.switch_to.frame(ifram)
+framelogo=Driver.find_element(By.XPATH,"//div[@class='logo']")
+highlight(framelogo,Driver,1)
+Driver.switch_to.default_content()
 
 
 time.sleep(3)
 Driver.close()
+
+# This is the demo code.
